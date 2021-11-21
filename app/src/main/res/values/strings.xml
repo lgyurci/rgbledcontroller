@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RGB LED Controller</string>
+    <string name="brightness">Brightness</string>
+    <string name="turn_on_leds">Turn on LEDs</string>
+    <string name="color_picker">Color picker</string>
+    <string name="main_lights">Main lights</string>
 </resources>
