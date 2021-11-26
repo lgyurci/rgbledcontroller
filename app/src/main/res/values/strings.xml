@@ -11,5 +11,9 @@
     <string name="g">G:</string>
     <string name="b">B:</string>
     <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="main_lights_button">Main lights button</string>
+    <string name="palette">Palette</string>
+    <string name="camera">Camera</string>
+    <string name="current_rgb_set_rgb">Current rgb/set rgb</string>
 </resources>

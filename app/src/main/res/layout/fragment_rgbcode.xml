@@ -10,33 +10,40 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:backgroundTint="#FF0000"
+        android:contentDescription="@string/red"
         android:text="@string/r"
         app:layout_constraintBottom_toBottomOf="@+id/er"
         app:layout_constraintEnd_toStartOf="@+id/er"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
     <ImageButton
         android:id="@+id/tvg"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:backgroundTint="#00FF00"
+        android:contentDescription="@string/green"
         android:text="@string/g"
         app:layout_constraintBottom_toBottomOf="@+id/er"
         app:layout_constraintEnd_toStartOf="@+id/eg"
         app:layout_constraintStart_toEndOf="@+id/er"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck,ImageContrastCheck,ImageContrastCheck,ImageContrastCheck,ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/tvb"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:backgroundTint="#0000FF"
+        android:contentDescription="@string/blue"
         android:text="@string/b"
         app:layout_constraintBottom_toBottomOf="@+id/er"
         app:layout_constraintEnd_toStartOf="@+id/eb"
         app:layout_constraintStart_toEndOf="@+id/eg"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
     <EditText
         android:id="@+id/er"
         android:layout_width="70dp"
@@ -45,7 +52,9 @@
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/tvg"
         app:layout_constraintStart_toEndOf="@id/tvr"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/eg"
@@ -55,7 +64,9 @@
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/tvb"
         app:layout_constraintStart_toEndOf="@+id/tvg"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/eb"
@@ -65,7 +76,9 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvb"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck"
+        android:autofillHints="" />
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -74,8 +87,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bok"
         android:text="@string/cancel"
-        android:layout_marginRight="32dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
         />
     <Button
         android:layout_width="100dp"
@@ -85,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/boc"
         android:text="@string/ok"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

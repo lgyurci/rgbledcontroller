@@ -44,7 +44,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewcp"
         app:layout_constraintBottom_toTopOf="@+id/textViewimb"
-        app:srcCompat="@drawable/color_wheel_730" />
+        app:srcCompat="@drawable/color_wheel_730"
+        android:contentDescription="@string/color_picker" />
 
     <TextView
         android:id="@+id/textViewcp"
@@ -65,6 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/imageButton" />
+
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="0dp"
@@ -72,31 +74,38 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/main_lights_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_highlight_24" />
+        app:srcCompat="@drawable/ic_baseline_highlight_24"
+        tools:ignore="SpeakableTextPresentCheck,RedundantDescriptionCheck" />
 
     <ImageButton
         android:id="@+id/imageButtoncolor"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginStart="32dp"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintBottom_toTopOf="@id/textViewimb"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_palette_24" />
+        app:srcCompat="@drawable/ic_baseline_palette_24"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/palette" />
+
     <ImageButton
         android:id="@+id/imageButtoncam"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintBottom_toTopOf="@id/textViewimb"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_camera_alt_24" />
+        app:srcCompat="@drawable/ic_baseline_camera_alt_24"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/camera" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch1"
@@ -119,6 +128,7 @@
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar2"
-        app:srcCompat="@android:drawable/checkbox_off_background" />
+        app:srcCompat="@android:drawable/checkbox_off_background"
+        android:contentDescription="@string/current_rgb_set_rgb" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

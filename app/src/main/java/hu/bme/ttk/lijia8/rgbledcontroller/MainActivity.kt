@@ -1,22 +1,14 @@
 package hu.bme.ttk.lijia8.rgbledcontroller
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.MotionEvent
-import android.view.View
 import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
 import hu.bme.ttk.lijia8.rgbledcontroller.singletons.CurrentRGB
-import kotlin.math.atan2
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.sqrt
+import kotlin.math.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -33,28 +25,24 @@ class MainActivity : AppCompatActivity() {
 
         val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
 
-        binding.imageView.setOnTouchListener { view, event ->
+        binding.imageView.setOnTouchListener { _, event ->
             var x = event?.x?.toInt() ?: 0
             var y = event?.y?.toInt() ?: 0
 
             val ra = binding.imageView.width * 0.5
             val d = sqrt(
-                Math.pow(
-                    x - (binding.imageView.width * 0.5),
-                    2.0
-                ) + Math.pow(y - (binding.imageView.height * 0.5), 2.0)
+                (x - (binding.imageView.width * 0.5)).pow(2.0) + (y - (binding.imageView.height * 0.5)).pow(2.0)
             )
-            var pixel = 0
             var two = false
             if (d + 5 > ra) {
-                var ang =
+                val ang =
                     atan2(y - binding.imageView.height * 0.5, x - binding.imageView.width * 0.5)
                 x = binding.imageView.width / 2 + ((ra - 4) * cos(ang)).toInt()
                 y = binding.imageView.height / 2 + ((ra - 4) * sin(ang)).toInt()
                 two = true
             }
 
-            pixel = bitmap.getPixel(
+            val pixel: Int = bitmap.getPixel(
                 (x * (bitmap.width.toDouble() / binding.imageView.width)).toInt(),
                 (y * (bitmap.height.toDouble() / binding.imageView.height)).toInt()
             )
