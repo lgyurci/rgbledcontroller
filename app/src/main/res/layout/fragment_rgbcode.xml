@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageButton
+        android:id="@+id/tvr"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:backgroundTint="#FF0000"
+        android:text="@string/r"
+        app:layout_constraintBottom_toBottomOf="@+id/er"
+        app:layout_constraintEnd_toStartOf="@+id/er"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/tvg"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:backgroundTint="#00FF00"
+        android:text="@string/g"
+        app:layout_constraintBottom_toBottomOf="@+id/er"
+        app:layout_constraintEnd_toStartOf="@+id/eg"
+        app:layout_constraintStart_toEndOf="@+id/er"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/tvb"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:backgroundTint="#0000FF"
+        android:text="@string/b"
+        app:layout_constraintBottom_toBottomOf="@+id/er"
+        app:layout_constraintEnd_toStartOf="@+id/eb"
+        app:layout_constraintStart_toEndOf="@+id/eg"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/er"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:hint="@string/red"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/tvg"
+        app:layout_constraintStart_toEndOf="@id/tvr"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/eg"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:hint="@string/green"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/tvb"
+        app:layout_constraintStart_toEndOf="@+id/tvg"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/eb"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:hint="@string/blue"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvb"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/boc"
+        app:layout_constraintTop_toBottomOf="@id/er"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bok"
+        android:text="@string/cancel"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="8dp"
+        />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bok"
+        app:layout_constraintTop_toBottomOf="@id/er"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/boc"
+        android:text="@string/ok"
+        android:layout_marginRight="8dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
