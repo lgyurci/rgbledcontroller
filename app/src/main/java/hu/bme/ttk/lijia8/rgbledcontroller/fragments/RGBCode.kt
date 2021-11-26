@@ -24,11 +24,13 @@ class RGBCode : DialogFragment() {
         binding.bok.setOnClickListener{
             CurrentRGB.setRGB(binding.er.text.toString().toInt(),binding.eg.text.toString().toInt(),binding.eb.text.toString().toInt())
             (activity as MainActivity).refreshRGBIndicator()
+            (activity as MainActivity).updateSeekBar()
+            (activity as MainActivity).update()
             this.dismiss()
         }
-        binding.er.setText(CurrentRGB.red.toString())
-        binding.eg.setText(CurrentRGB.green.toString())
-        binding.eb.setText(CurrentRGB.blue.toString())
+        binding.er.setText(CurrentRGB.bred.toString())
+        binding.eg.setText(CurrentRGB.bgreen.toString())
+        binding.eb.setText(CurrentRGB.bblue.toString())
         return binding.root
     }
 

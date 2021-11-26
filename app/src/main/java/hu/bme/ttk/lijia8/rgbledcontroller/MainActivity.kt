@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.SeekBar
 import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
 import hu.bme.ttk.lijia8.rgbledcontroller.singletons.CurrentRGB
@@ -12,6 +14,7 @@ import kotlin.math.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,13 +69,47 @@ class MainActivity : AppCompatActivity() {
             }
 
             refreshRGBIndicator()
+            update()
 
             //   return view?.onTouchEvent(event) ?: true
             true
+        }
+
+        binding.seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, fromUser: Boolean) {
+                if (fromUser){
+                    update()
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+
+        binding.switch1.setOnClickListener{
+            update()
         }
     }
 
     fun refreshRGBIndicator(){
         binding.imageView3.setColorFilter(Color.rgb(CurrentRGB.red,CurrentRGB.green,CurrentRGB.blue))
     }
+
+    fun updateSeekBar(){
+        binding.seekBar2.progress = CurrentRGB.brightness
+    }
+    fun update(){
+        var rts = CurrentRGB.bred
+        var gts = CurrentRGB.bgreen
+        var bts = CurrentRGB.bblue
+        if (!binding.switch1.isChecked){
+            rts = 0
+            gts = 0
+            bts = 0
+        }
+    }
+
 }

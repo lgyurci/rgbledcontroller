@@ -19,6 +19,12 @@ object CurrentRGB {
         set (value){
             br = value
         }
+    val bred: Int
+        get() = (this.r*(br.toDouble()/100)).toInt()
+    val bgreen: Int
+        get() = (this.g*(br.toDouble()/100)).toInt()
+    val bblue: Int
+        get() = (this.b*(br.toDouble()/100)).toInt()
 
     fun setRGB(red:Int,green:Int,blue:Int){
         var norm = 0
