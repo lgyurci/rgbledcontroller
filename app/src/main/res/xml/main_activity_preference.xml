@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:key="ip"
+        app:title="IP address and port of the controller" />
+
+    <SwitchPreferenceCompat
+        app:key="notifications"
+        app:title="Enable LED turn on notifications"/>
+
+    <SwitchPreference
+        app:key="cambutton"
+        app:title="Disable camera button"
+        app:summary="It can be annoying"/>
+
+</PreferenceScreen>

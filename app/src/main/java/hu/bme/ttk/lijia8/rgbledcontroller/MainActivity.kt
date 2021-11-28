@@ -20,6 +20,7 @@ import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
 import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
+import hu.bme.ttk.lijia8.rgbledcontroller.fragments.MainActivityPreferences
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.Palette
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
 import hu.bme.ttk.lijia8.rgbledcontroller.singletons.CurrentRGB
@@ -154,7 +155,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.item_settings){
-
+            val intent = Intent(this, MainSettingsActivity::class.java)
+            startActivity(intent)
         }
         if (item.itemId == R.id.item_clear_presets){
             val model = RGBViewModel()
