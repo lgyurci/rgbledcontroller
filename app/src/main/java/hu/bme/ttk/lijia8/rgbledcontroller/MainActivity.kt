@@ -19,6 +19,7 @@ import android.widget.SeekBar
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
+import androidx.preference.PreferenceManager
 import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.MainActivityPreferences
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.Palette
@@ -34,11 +35,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+     //   preferenceManager.findPreference<EditTextPreference>("ip")?.text.toString()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.imageView3.setOnClickListener {
             RGBCode().show(supportFragmentManager,null)
+        }
+
+        val camb = PreferenceManager.getDefaultSharedPreferences( this ).getBoolean("cambutton",true) //.edit().putString("otherKey","value").commit();
+        if (camb){
+            binding.imageButtoncam.visibility = View.GONE
         }
 
         val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
