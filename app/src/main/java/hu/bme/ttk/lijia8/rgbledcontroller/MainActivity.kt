@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.SeekBar
 import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
+import hu.bme.ttk.lijia8.rgbledcontroller.fragments.Palette
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
 import hu.bme.ttk.lijia8.rgbledcontroller.singletons.CurrentRGB
 import kotlin.math.*
@@ -88,6 +89,10 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
+
+        binding.imageButtoncolor.setOnClickListener{
+            Palette().show(supportFragmentManager,null)
+        }
 
         binding.switch1.setOnClickListener{
             update()
