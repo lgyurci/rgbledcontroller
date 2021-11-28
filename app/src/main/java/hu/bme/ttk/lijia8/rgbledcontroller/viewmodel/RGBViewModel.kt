@@ -27,4 +27,8 @@ class RGBViewModel : ViewModel() {
     fun delete(color: RoomRGB) = viewModelScope.launch {
         repository.delete(color)
     }
+
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
 }

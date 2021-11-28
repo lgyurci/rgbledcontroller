@@ -2,6 +2,7 @@ package hu.bme.ttk.lijia8.rgbledcontroller
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -9,7 +10,11 @@ import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.AttributeSet
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.SeekBar
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
@@ -18,6 +23,7 @@ import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.Palette
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
 import hu.bme.ttk.lijia8.rgbledcontroller.singletons.CurrentRGB
+import hu.bme.ttk.lijia8.rgbledcontroller.viewmodel.RGBViewModel
 import kotlin.math.*
 
 class MainActivity : AppCompatActivity() {
@@ -139,6 +145,22 @@ class MainActivity : AppCompatActivity() {
             refreshRGBIndicator()
             update()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.item_settings){
+
+        }
+        if (item.itemId == R.id.item_clear_presets){
+            val model = RGBViewModel()
+            model.deleteAll()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun refreshRGBIndicator(){

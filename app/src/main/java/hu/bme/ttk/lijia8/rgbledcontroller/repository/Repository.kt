@@ -26,6 +26,10 @@ class Repository(private val rgbDao: RGBDao) {
         rgbDao.deleteColor(roomRGB)
     }
 
+    suspend fun deleteAll() = withContext(Dispatchers.IO){
+        rgbDao.deleteAll()
+    }
+
     private fun RoomRGB.toDomainModel(): RoomRGB {
         return RoomRGB(
             id = id,

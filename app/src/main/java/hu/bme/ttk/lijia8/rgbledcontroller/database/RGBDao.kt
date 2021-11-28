@@ -16,4 +16,8 @@ interface RGBDao {
 
     @Query("SELECT * FROM rgbpresets WHERE id == :id")
     fun getColorById(id: Int?): RoomRGB?
+
+    @Query("DELETE FROM rgbpresets")
+    fun deleteAll()
+
 }
