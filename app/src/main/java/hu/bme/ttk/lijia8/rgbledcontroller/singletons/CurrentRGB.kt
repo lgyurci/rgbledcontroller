@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
 
 object CurrentRGB {
-    private var r=0
-    private var g=0
-    private var b=0
-    private var br=0
+    private var r=255
+    private var g=255
+    private var b=255
+    private var br=100
     val red: Int
         get() = this.r
     val green: Int

@@ -1,12 +1,19 @@
 package hu.bme.ttk.lijia8.rgbledcontroller
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.SeekBar
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.Palette
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
@@ -95,6 +102,41 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.switch1.setOnClickListener{
+            update()
+        }
+
+        binding.imageButtoncam.setOnClickListener{
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, 101)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+
+        if (requestCode == 101) {
+            val imageBitmap = data?.extras?.get("data") as? Bitmap ?: return
+            val pixelcount = imageBitmap.height*imageBitmap.width
+            var redsum = 0
+            var greensum = 0
+            var bluesum = 0
+            for (i: Int in 0 until imageBitmap.height){
+                for (j: Int in 0 until imageBitmap.width){
+                    redsum += imageBitmap.getPixel(j,i).red
+                    greensum += imageBitmap.getPixel(j,i).green
+                    bluesum += imageBitmap.getPixel(j,i).blue
+                }
+            }
+            val red = (redsum.toDouble()/pixelcount).toInt()
+            val green = (greensum.toDouble()/pixelcount).toInt()
+            val blue = (bluesum.toDouble()/pixelcount).toInt()
+            val brightness = CurrentRGB.brightness
+            CurrentRGB.setRGB(red,green,blue)
+            CurrentRGB.brightness = brightness
+            refreshRGBIndicator()
             update()
         }
     }
