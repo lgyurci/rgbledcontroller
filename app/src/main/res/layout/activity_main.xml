@@ -66,10 +66,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton" />
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonLights" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonLights"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginStart="32dp"

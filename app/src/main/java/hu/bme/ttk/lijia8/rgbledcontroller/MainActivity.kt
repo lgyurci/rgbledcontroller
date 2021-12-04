@@ -24,6 +24,7 @@ import hu.bme.ttk.lijia8.rgbledcontroller.databinding.ActivityMainBinding
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.MainActivityPreferences
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.Palette
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
+import hu.bme.ttk.lijia8.rgbledcontroller.network.ArduinoNetworkAPI
 import hu.bme.ttk.lijia8.rgbledcontroller.singletons.CurrentRGB
 import hu.bme.ttk.lijia8.rgbledcontroller.viewmodel.RGBViewModel
 import kotlin.math.*
@@ -31,11 +32,24 @@ import kotlin.math.*
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    @Volatile
+    var asyncRunning = false
+
+    private lateinit var api : ArduinoNetworkAPI
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        api = ArduinoNetworkAPI(this)
+
      //   preferenceManager.findPreference<EditTextPreference>("ip")?.text.toString()
+
+        binding.imageButtonLights.setOnClickListener{
+            if (!asyncRunning){
+                async(CurrentRGB.bred,CurrentRGB.bgreen,CurrentRGB.bblue) { api.switchRelay() }
+            }
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -189,6 +203,35 @@ class MainActivity : AppCompatActivity() {
             gts = 0
             bts = 0
         }
+        if (!asyncRunning){
+            async(rts,gts,bts) { api.sendRGB(rts,gts,bts) }
+        }
+    }
+
+    private fun handleNetworkReturn(rcode: Int){
+
+    }
+
+    private fun async(r:Int,g:Int,b:Int,call: () -> Int) {
+        asyncRunning = true
+        Thread {
+            val ret = try {
+                call()
+            } catch (e: Exception){
+                1
+            }
+            runOnUiThread {
+                handleNetworkReturn(ret)
+                asyncRunning = false
+                if (binding.switch1.isChecked && (r != 0 || b!= 0 || g != 0)){
+                    update()
+                } else {
+                    if (r != CurrentRGB.bred || g != CurrentRGB.bgreen || b != CurrentRGB.bblue){
+                        update()
+                    }
+                }
+            }
+        }.start()
     }
 
 }
