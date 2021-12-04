@@ -2,6 +2,7 @@ package hu.bme.ttk.lijia8.rgbledcontroller
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -16,6 +17,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SeekBar
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
@@ -25,9 +27,11 @@ import hu.bme.ttk.lijia8.rgbledcontroller.fragments.MainActivityPreferences
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.Palette
 import hu.bme.ttk.lijia8.rgbledcontroller.fragments.RGBCode
 import hu.bme.ttk.lijia8.rgbledcontroller.network.ArduinoNetworkAPI
+import hu.bme.ttk.lijia8.rgbledcontroller.notification.NotificationHelper
 import hu.bme.ttk.lijia8.rgbledcontroller.singletons.CurrentRGB
 import hu.bme.ttk.lijia8.rgbledcontroller.viewmodel.RGBViewModel
 import kotlin.math.*
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -45,6 +49,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        NotificationHelper.createNotificationChannels(this)
 
         binding.imageButtonLights.setOnClickListener{
             if (!asyncRunning){
@@ -131,6 +137,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.switch1.setOnClickListener{
             update()
+            if (!binding.switch1.isChecked) {
+                with(NotificationManagerCompat.from(this.applicationContext)) {
+                    cancelAll()
+                }
+            }
         }
 
         binding.imageButtoncam.setOnClickListener{
@@ -139,6 +150,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         asyncFetch{api.fetchCurrentRGB()}
+
+        turnOffLedsByNotification(intent)
     }
 
 
@@ -261,6 +274,24 @@ class MainActivity : AppCompatActivity() {
             }
             handleNetworkReturn(ret)
         }.start()
+    }
+
+    private fun turnOffLedsByNotification(intent: Intent) {
+        if (intent.action == NotificationHelper.ACTION_SHOW_LEDS_ACTIVE) {
+            binding.switch1.isChecked = false
+            with(NotificationManagerCompat.from(this.applicationContext)) {
+                cancelAll()
+            }
+            update()
+            this.finishAffinity()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (binding.switch1.isChecked && PreferenceManager.getDefaultSharedPreferences( this ).getBoolean("notifications",true)){
+            NotificationHelper.createLedsActiveNotification(this)
+        }
     }
 
 }

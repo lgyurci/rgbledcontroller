@@ -3,19 +3,21 @@
 
     <EditTextPreference
         app:key="ip"
-        app:title="IP address and port of the controller" />
+        app:title="@string/ipport"
+        app:summary="@string/exampleip"/>
 
     <Preference
         app:key="concheck"
-        app:title="Check connection" />
+        app:title="@string/check_connection" />
 
     <SwitchPreferenceCompat
         app:key="notifications"
-        app:title="Enable LED turn on notifications"/>
+        app:title="@string/enable_notifications"
+        app:summary="@string/enable_notifications_summary"/>
 
     <SwitchPreferenceCompat
         app:key="cambutton"
-        app:title="Disable camera button"
-        app:summary="It can be annoying... Requires a restart"/>
+        app:title="@string/disable_camera"
+        app:summary="@string/disable_camera_summary"/>
 
 </PreferenceScreen>

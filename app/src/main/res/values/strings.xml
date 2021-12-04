@@ -16,11 +16,19 @@
     <string name="palette">Palette</string>
     <string name="camera">Camera</string>
     <string name="current_rgb_set_rgb">Current rgb/set rgb</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save_current">Save current</string>
     <string name="clear_all_presets">Clear all presets</string>
     <string name="settings">Settings</string>
     <string name="working_connection">Connection is working!</string>
     <string name="connection_fail">Connection failed :(</string>
+    <string name="ipport">IP address and port of the controller</string>
+    <string name="exampleip">Example: 192.168.0.203:80</string>
+    <string name="check_connection">Check connection</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="enable_notifications_summary">Send notification reminders when LEDs are still turned on after you leave the app</string>
+    <string name="disable_camera">Disable camera button</string>
+    <string name="disable_camera_summary">It can be annoying... Requires a restart</string>
+    <string name="active_leds">Active LEDs</string>
+    <string name="leds_on_desc">LEDs are still turned on! Tap here to turn them off.</string>
+    <string name="turn_off">Turn off</string>
 </resources>
