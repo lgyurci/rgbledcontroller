@@ -5,6 +5,10 @@
         app:key="ip"
         app:title="IP address and port of the controller" />
 
+    <Preference
+        app:key="concheck"
+        app:title="Check connection" />
+
     <SwitchPreferenceCompat
         app:key="notifications"
         app:title="Enable LED turn on notifications"/>

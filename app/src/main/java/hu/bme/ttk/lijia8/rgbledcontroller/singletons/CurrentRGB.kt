@@ -51,4 +51,26 @@ object CurrentRGB {
             br = ((1/factor)*100).toInt()
         }
     }
+
+    fun setAbsoluteRGB(red:Int,green:Int,blue:Int){
+        var norm = 0
+        if (red == 0 && green == 0 && blue == 0){
+            r = 255
+            g = 255
+            b = 255
+            br = 0
+        } else {
+            if (red >= green && red >= blue) {
+                norm = red
+            } else if (green >= red && green >= blue) {
+                norm = green
+            } else if (blue >= red && blue >= green) {
+                norm = blue
+            }
+            var factor = 255.0 / norm.toDouble()
+            r = (red * factor).toInt()
+            g = (green * factor).toInt()
+            b = (blue * factor).toInt()
+        }
+    }
 }

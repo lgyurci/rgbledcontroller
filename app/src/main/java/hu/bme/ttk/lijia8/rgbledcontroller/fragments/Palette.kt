@@ -55,7 +55,7 @@ class Palette : DialogFragment(),PaletteRvAdapter.OnColorClickedListener {
     }
 
     override fun onColorClicked(r: Int, g: Int, b: Int) {
-        CurrentRGB.setRGB(r,g,b)
+        CurrentRGB.setAbsoluteRGB(r,g,b)
         (activity as MainActivity).refreshRGBIndicator()
         (activity as MainActivity).update()
         this.dismiss()

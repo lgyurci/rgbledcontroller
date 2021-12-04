@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                         gr = 0
                     }
                 }
-                CurrentRGB.setRGB(re,gr,bl)
+                CurrentRGB.setAbsoluteRGB(re,gr,bl)
             }
 
             refreshRGBIndicator()
@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, i: Int, fromUser: Boolean) {
+                CurrentRGB.brightness = binding.seekBar2.progress
                 if (fromUser){
                     update()
                 }
@@ -136,7 +137,10 @@ class MainActivity : AppCompatActivity() {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(takePictureIntent, 101)
         }
+
+        asyncFetch{api.fetchCurrentRGB()}
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -196,6 +200,7 @@ class MainActivity : AppCompatActivity() {
         var rts = CurrentRGB.bred
         var gts = CurrentRGB.bgreen
         var bts = CurrentRGB.bblue
+        Log.d("cupdate","r:$rts b:$bts g:$gts brightness: ${CurrentRGB.brightness}")
         if (!binding.switch1.isChecked){
             rts = 0
             gts = 0
@@ -216,19 +221,45 @@ class MainActivity : AppCompatActivity() {
             val ret = try {
                 call()
             } catch (e: Exception){
-                1
+                Log.d("axis",e.message?:"none")
             }
             runOnUiThread {
                 handleNetworkReturn(ret)
                 asyncRunning = false
-                if (binding.switch1.isChecked && (r != 0 || b!= 0 || g != 0)){
-                    update()
+                if (!binding.switch1.isChecked){
+                    if (r != 0 || b!= 0 || g != 0) {
+                        Log.d("network", "Critical packet miss, re-sending current settings. Last settings sent | Current settings: r:$r|${CurrentRGB.bred} g:$g|${CurrentRGB.bgreen} b:$b|${CurrentRGB.bblue}")
+                        update()
+                    }
                 } else {
                     if (r != CurrentRGB.bred || g != CurrentRGB.bgreen || b != CurrentRGB.bblue){
+                        Log.d("network", "Packet miss, re-sending current settings. Last settings sent | Current settings: r:$r|${CurrentRGB.bred} g:$g|${CurrentRGB.bgreen} b:$b|${CurrentRGB.bblue}")
                         update()
                     }
                 }
             }
+        }.start()
+    }
+
+    private fun asyncFetch(call: () -> Int) {
+        Thread {
+            var ret = 0
+            try {
+                ret = call()
+                runOnUiThread {
+                    if (CurrentRGB.brightness != 0){
+                        binding.switch1.isChecked = true
+                    } else {
+                        CurrentRGB.brightness = 100
+                        binding.switch1.isChecked = false
+                    }
+                    refreshRGBIndicator()
+                    updateSeekBar()
+                }
+            } catch (e: Exception){
+                1
+            }
+            handleNetworkReturn(ret)
         }.start()
     }
 
