@@ -35,24 +35,22 @@ class MainActivity : AppCompatActivity() {
     @Volatile
     var asyncRunning = false
 
-    private lateinit var api : ArduinoNetworkAPI
+    private val api : ArduinoNetworkAPI = ArduinoNetworkAPI(this)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        api = ArduinoNetworkAPI(this)
-
      //   preferenceManager.findPreference<EditTextPreference>("ip")?.text.toString()
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.imageButtonLights.setOnClickListener{
             if (!asyncRunning){
                 async(CurrentRGB.bred,CurrentRGB.bgreen,CurrentRGB.bblue) { api.switchRelay() }
             }
         }
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         binding.imageView3.setOnClickListener {
             RGBCode().show(supportFragmentManager,null)
