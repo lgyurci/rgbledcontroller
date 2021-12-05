@@ -294,4 +294,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        with(NotificationManagerCompat.from(this.applicationContext)) {
+            cancelAll()
+        }
+    }
+
 }
